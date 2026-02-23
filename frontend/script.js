@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailText = document.getElementById('prediction-detail');
     const performanceGrid = document.getElementById('performance-grid');
 
+    // For deployment, change this to your Render URL (e.g., https://your-app.onrender.com)
+    const API_URL = 'http://127.0.0.1:5000';
+
     // Fetch model performance results from backend
-    fetch('http://127.0.0.1:5000/results')
+    fetch(`${API_URL}/results`)
         .then(response => response.json())
         .then(data => {
             Object.keys(data).forEach(model => {
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/predict', {
+            const response = await fetch(`${API_URL}/predict`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
