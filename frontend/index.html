@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeartCare AI | Advanced Disease Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HeartCare AI Prediction</h1>
+            <p>Utilizing Advanced Machine Learning to Predict Heart Disease Risk</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Prediction Form -->
+            <div class="card">
+                <h2>Medical Parameters</h2>
+                <form id="prediction-form">
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" class="form-control" name="age" required value="45">
+                        </div>
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <select class="form-control" name="sex">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chest Pain Type (0-3)</label>
+                        <select class="form-control" name="cp">
+                            <option value="0">Typical Angina</option>
+                            <option value="1">Atypical Angina</option>
+                            <option value="2">Non-anginal Pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Resting Blood Pressure</label>
+                            <input type="number" class="form-control" name="trestbps" required value="120">
+                        </div>
+                        <div class="form-group">
+                            <label>Cholesterol (mg/dl)</label>
+                            <input type="number" class="form-control" name="chol" required value="240">
+                        </div>
+                    </div>
+
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Fasting Blood Sugar > 120</label>
+                            <select class="form-control" name="fbs">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Resting ECG Results</label>
+                            <select class="form-control" name="restecg">
+                                <option value="0">Normal</option>
+                                <option value="1">ST-T Wave Abnormality</option>
+                                <option value="2">Left Ventricular Hypertrophy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Max Heart Rate</label>
+                            <input type="number" class="form-control" name="thalach" required value="150">
+                        </div>
+                        <div class="form-group">
+                            <label>Exercise Induced Angina</label>
+                            <select class="form-control" name="exang">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Oldpeak (ST Depression)</label>
+                            <input type="number" step="0.1" class="form-control" name="oldpeak" required value="1.0">
+                        </div>
+                        <div class="form-group">
+                            <label>Slope of Peak Exercise</label>
+                            <select class="form-control" name="slope">
+                                <option value="0">Upsloping</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Downsloping</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Major Vessels (0-3)</label>
+                            <input type="number" class="form-control" name="ca" required value="0" min="0" max="3">
+                        </div>
+                        <div class="form-group">
+                            <label>Thalassemia</label>
+                            <select class="form-control" name="thal">
+                                <option value="1">Normal</option>
+                                <option value="2">Fixed Defect</option>
+                                <option value="3">Reversable Defect</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Analyze Risk Profile</button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-container">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Processing patient data...</p>
+                </div>
+
+                <div class="card" id="result-card">
+                    <h2>Prediction Result</h2>
+                    <div class="risk-display" id="risk-box">
+                        <p>Heart Disease Risk Level</p>
+                        <div class="risk-level" id="risk-text">Calculating...</div>
+                        <p id="prediction-detail"></p>
+                    </div>
+
+                    <div class="probability-section">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Risk Probability</span>
+                            <span id="prob-percentage">0%</span>
+                        </div>
+                        <div class="probability-bar">
+                            <div class="probability-fill" id="prob-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 0.75rem;">
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            <strong>Disclaimer:</strong> This is an AI-powered prediction based on training data. Always consult a medical professional for diagnosis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Intro Card (Shown initially) -->
+                 <div class="card" id="intro-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                    <img src="https://img.icons8.com/clouds/200/heart-with-pulse.png" alt="Heart" style="margin: 0 auto;">
+                    <h3 style="margin-top: 1rem;">Ready for Analysis</h3>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Please enter the patient's medical parameters on the left to generate a heart disease risk assessment.</p>
+                 </div>
+            </div>
+        </div>
+
+        <!-- Performance Comparison -->
+        <div class="performance-section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">Algorithm Performance Comparison</h2>
+            <div class="performance-grid" id="performance-grid">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
