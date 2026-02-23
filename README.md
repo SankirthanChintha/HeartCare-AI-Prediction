@@ -37,3 +37,8 @@ Heart disease is one of the leading causes of mortality worldwide, and early det
 
 ## Keywords
 Heart Disease Prediction, Machine Learning, Healthcare Analytics, Classification Algorithms, Early Diagnosis.
+
+
+## Run-commands
+python backend/app.py
+start frontend/index.html

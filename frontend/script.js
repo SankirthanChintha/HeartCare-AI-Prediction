@@ -74,13 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 riskBox.className = 'risk-display';
                 if (result.risk_level === 'High') {
                     riskBox.classList.add('risk-high');
-                    detailText.innerText = 'High probability of heart disease detected. Urgent medical consultation recommended.';
+                    detailText.innerHTML = `<strong>Critical:</strong> ${result.detailed_analysis}`;
                 } else if (result.risk_level === 'Medium') {
                     riskBox.classList.add('risk-medium');
-                    detailText.innerText = 'Moderate risk detected. Periodic screening and lifestyle adjustments advised.';
+                    detailText.innerHTML = `<strong>Attention:</strong> ${result.detailed_analysis}`;
                 } else {
                     riskBox.classList.add('risk-low');
-                    detailText.innerText = 'Low risk of heart disease. Maintain a healthy lifestyle and regular check-ups.';
+                    detailText.innerText = result.detailed_analysis;
                 }
             }, 800);
 

@@ -51,15 +51,25 @@ def predict():
         
         # Risk level logic
         risk_level = "Low"
+        detailed_analysis = "Based on your parameters, no immediate major risk patterns were detected."
+        
         if probability > 0.7:
             risk_level = "High"
+            risks = []
+            if float(data['cp']) > 0: risks.append("Potential Coronary Artery Disease (CAD) markers")
+            if float(data['ca']) > 0: risks.append("Presence of major vessel narrowing")
+            if float(data['oldpeak']) > 1.5: risks.append("Ischemic heart strain (ST depression)")
+            if float(data['thalach']) < 120: risks.append("Reduced cardiac output/exercise capacity")
+            detailed_analysis = "High risk factors detected: " + ", ".join(risks) if risks else "Generic high-risk cardiac profile detected."
         elif probability > 0.3:
             risk_level = "Medium"
+            detailed_analysis = "Moderate risk patterns detected. Possible early signs of cardiovascular strain or high cholesterol influence."
             
         return jsonify({
             'prediction': int(prediction[0]),
             'probability': float(probability),
-            'risk_level': risk_level
+            'risk_level': risk_level,
+            'detailed_analysis': detailed_analysis
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 400
