@@ -14,7 +14,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 # Get absolute path of the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, '..', 'data', 'heart.csv')
-MODELS_DIR = os.path.join(BASE_DIR, '..', 'models')
+MODELS_DIR = os.path.join(BASE_DIR, 'models')
 
 # Load dataset
 df = pd.read_csv(DATA_PATH)
