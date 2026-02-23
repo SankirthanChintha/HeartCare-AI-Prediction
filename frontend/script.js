@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const performanceGrid = document.getElementById('performance-grid');
 
     // For deployment, change this to your Render URL (e.g., https://your-app.onrender.com)
-    const API_URL = 'http://127.0.0.1:5000';
+    const API_URL = 'https://heartcare-ai-prediction.onrender.com';
 
     // Fetch model performance results from backend
     fetch(`${API_URL}/results`)
